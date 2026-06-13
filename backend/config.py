@@ -1,4 +1,5 @@
 # config.py
+import os
 
 # Tracking Parameters
 MIN_DETECTION_CONFIDENCE = 0.7
@@ -16,3 +17,6 @@ CURRENT_PROFILE = "GEOMETRY_DASH"
 SERIAL_ENABLED = False
 SERIAL_PORT = "COM3"  # '/dev/ttyUSB0' on Linux
 BAUD_RATE = 9600
+
+# CORS Configuration
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")

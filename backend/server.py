@@ -3,14 +3,16 @@ from pydantic import BaseModel
 from vision_engine import GestureEngine
 import threading
 import uvicorn
+import os
 from fastapi.middleware.cors import CORSMiddleware
+from config import ALLOWED_ORIGINS
 
 app = FastAPI()
 
 # Add CORS middleware for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -42,4 +44,5 @@ async def stop_engine():
     return {"status": "success", "message": "System stopped successfully"}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=2000)
+    port = int(os.getenv("PORT", 2000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
